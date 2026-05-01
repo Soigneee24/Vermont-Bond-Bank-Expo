@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vermont Bond Bank · Infrastructure Investment Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nyu-violet: #57068C;
+    --nyu-violet-deep: #3D0463;
+    --paper: #F7F3EC;
+    --paper-warm: #EFE8DA;
+    --ink: #1A1614;
+    --ink-soft: #4A413B;
+    --ink-light: #8B8278;
+    --ochre: #B8780B;
+    --rule: #2A2420;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Newsreader', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 17px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(87, 6, 140, 0.025) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(184, 120, 11, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 28px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    border-top: 4px solid var(--nyu-violet);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .masthead-left { font-weight: 500; }
+  .masthead-right { font-weight: 400; color: var(--ink-light); }
+
+  /* HERO */
+  .hero {
+    padding: 36px 0 28px;
+    border-bottom: 1px solid var(--rule);
+    animation: slideUp 0.8s ease-out 0.1s both;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--nyu-violet);
+    font-weight: 600;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1.5px;
+    background: var(--nyu-violet);
+    display: inline-block;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(32px, 7.5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .hero-deck {
+    font-family: 'Newsreader', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ink-soft);
+    max-width: 540px;
+    line-height: 1.5;
+  }
+
+  /* SECTION */
+  section {
+    padding: 32px 0 4px;
+    animation: slideUp 0.8s ease-out both;
+  }
+
+  section:nth-of-type(1) { animation-delay: 0.2s; }
+  section:nth-of-type(2) { animation-delay: 0.3s; }
+  section:nth-of-type(3) { animation-delay: 0.4s; }
+  section:nth-of-type(4) { animation-delay: 0.5s; }
+  section:nth-of-type(5) { animation-delay: 0.6s; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .section-num {
+    color: var(--nyu-violet);
+    margin-right: 12px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-top: 6px;
+    margin-bottom: 16px;
+    font-variation-settings: "opsz" 72, "SOFT" 30;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* CONTEXT — THE BIG NUMBER */
+  .stat-callout {
+    margin: 22px 0 10px;
+    padding: 24px 22px;
+    background: var(--paper-warm);
+    border-left: 3px solid var(--nyu-violet);
+    position: relative;
+  }
+
+  .stat-callout-number {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--nyu-violet-deep);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 6px;
+  }
+
+  .stat-callout-label {
+    font-family: 'Newsreader', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* METHODOLOGY LIST */
+  .method-list {
+    margin-top: 18px;
+    counter-reset: method;
+  }
+
+  .method-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px dashed rgba(42, 36, 32, 0.2);
+    counter-increment: method;
+  }
+
+  .method-item:last-child { border-bottom: none; }
+
+  .method-item::before {
+    content: counter(method, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--nyu-violet);
+    letter-spacing: 0.05em;
+    padding-top: 3px;
+  }
+
+  .method-content strong {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: -0.005em;
+  }
+
+  .method-content span {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  /* FINDINGS — TWO COLUMN */
+  .findings {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  @media (min-width: 600px) {
+    .findings { grid-template-columns: 1fr 1fr; gap: 22px; }
+  }
+
+  .finding-col {
+    padding: 20px 18px;
+    background: var(--paper-warm);
+    position: relative;
+  }
+
+  .finding-col-strength { border-top: 2px solid var(--ochre); }
+  .finding-col-attention { border-top: 2px solid var(--nyu-violet); }
+
+  .finding-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .finding-col-strength .finding-title { color: var(--ochre); }
+  .finding-col-attention .finding-title { color: var(--nyu-violet); }
+
+  .finding-list {
+    list-style: none;
+  }
+
+  .finding-list li {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(42, 36, 32, 0.15);
+  }
+
+  .finding-list li:last-child { border-bottom: none; }
+
+  .finding-list .data {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 13.5px;
+    letter-spacing: -0.01em;
+  }
+
+  /* DATA STORY — THE KEY VISUAL */
+  .data-story {
+    margin: 28px 0 8px;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .data-story-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 14px;
+  }
+
+  .data-story-headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 18px;
+    font-style: italic;
+    letter-spacing: -0.005em;
+  }
+
+  .data-bars {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    height: 110px;
+    margin: 18px 0 8px;
+  }
+
+  .bar-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .bar {
+    width: 100%;
+    background: var(--nyu-violet);
+    position: relative;
+    transition: height 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-origin: bottom;
+  }
+
+  .bar-fy22 { height: 80%; }
+  .bar-fy23 { height: 45%; background: var(--nyu-violet); opacity: 0.7; }
+  .bar-fy24 { height: 29%; background: var(--ochre); }
+
+  .bar-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--nyu-violet);
+    padding: 5px 9px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+    box-shadow: 0 2px 0 rgba(61, 4, 99, 0.25);
+  }
+
+  .bar-group:last-child .bar-value {
+    background: var(--ochre);
+    box-shadow: 0 2px 0 rgba(122, 80, 7, 0.3);
+  }
+
+  .bar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-light);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* NEXT STEPS */
+  .next-steps {
+    margin-top: 18px;
+    counter-reset: step;
+  }
+
+  .step-item {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(42, 36, 32, 0.12);
+    counter-increment: step;
+  }
+
+  .step-item:last-child { border-bottom: none; }
+
+  .step-item::before {
+    content: counter(step);
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--nyu-violet);
+    line-height: 1;
+    font-variation-settings: "opsz" 72;
+  }
+
+  .step-content {
+    padding-top: 4px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  .step-content strong {
+    color: var(--ink);
+    font-weight: 600;
+    font-family: 'Fraunces', serif;
+    font-size: 15.5px;
+  }
+
+  /* COLOPHON */
+  .colophon {
+    margin-top: 50px;
+    padding-top: 24px;
+    border-top: 4px solid var(--nyu-violet);
+    animation: fadeIn 0.8s ease-out 0.7s both;
+  }
+
+  .colophon-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+
+  .colophon-row strong {
+    color: var(--nyu-violet);
+    font-weight: 700;
+  }
+
+  .colophon-team {
+    font-family: 'Newsreader', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  .colophon-footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-align: center;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Inline data emphasis */
+  .data-em {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.92em;
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 120, 11, 0.25) 60%);
+    padding: 0 2px;
+  }
+
+  .accent {
+    color: var(--nyu-violet);
+    font-weight: 600;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="masthead-left">NYU Wagner · MPA Capstone</div>
+    <div class="masthead-right">Spring 2026</div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">White Paper Brief</div>
+    <h1>Infrastructure Investment in Vermont: A Portfolio Review</h1>
+    <p class="hero-deck">A three-layer analysis of the Vermont Bond Bank's lending patterns, statewide capital outlay, and peer institution practices — prepared for the Vermont Bond Bank.</p>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section>
+    <div class="section-label"><span class="section-num">01</span>The Problem</div>
+    <h2>Decades of lending data, but no integrated view.</h2>
+    <p>The Vermont Bond Bank had accumulated more than three decades of municipal lending records, but lacked an integrated view of how that lending had been distributed across infrastructure types and borrowers — or how Vermont's overall investment compared with national and regional benchmarks. Without that picture, identifying where lending might be well-aligned with statewide needs, and where there could be room to do more, was difficult.</p>
+  </section>
+
+  <!-- CLIENT + CONTEXT -->
+  <section>
+    <div class="section-label"><span class="section-num">02</span>Client &amp; Context</div>
+    <h2>The Vermont Bond Bank.</h2>
+    <p>Founded in 1970, the Vermont Bond Bank (VTBB) helps the state's small towns and school districts access long-term debt at lower cost through pooled borrowing. It also administers Vermont's Clean Water and Drinking Water revolving loan funds, giving it a broad role in the state's infrastructure finance system.</p>
+
+    <div class="stat-callout">
+      <div class="stat-callout-number">$3B+</div>
+      <div class="stat-callout-label">in tax-exempt and taxable bonds across <strong>107 municipal bond series</strong> — meaningful scale for a state of only 640,000 residents.</div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DELIVERED -->
+  <section>
+    <div class="section-label"><span class="section-num">03</span>What We Delivered</div>
+    <h2>A three-layer evidence base.</h2>
+    <p>The analysis combined VTBB's own historical record with two external reference points, so that findings would not rely on any single data source.</p>
+
+    <div class="method-list">
+      <div class="method-item">
+        <div class="method-content">
+          <strong>Internal Lending Portfolio</strong>
+          <span>1,641 loans from 1991 – 2025, inflation-adjusted, segmented by infrastructure type, borrower category, and year.</span>
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-content">
+          <strong>Statewide Benchmark</strong>
+          <span>Vermont vs. all 50 states on per-capita capital outlay across major infrastructure categories (FY2022 U.S. Census data).</span>
+        </div>
+      </div>
+      <div class="method-item">
+        <div class="method-content">
+          <strong>Peer Bond Bank Comparison</strong>
+          <span>VTBB vs. New Hampshire Municipal Bond Bank across FY2022 – FY2024, comparing General Resolution new money issuance.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FINDINGS -->
+  <section>
+    <div class="section-label"><span class="section-num">04</span>What We Found</div>
+    <h2>A balanced picture.</h2>
+    <p>The findings point to genuine strengths in Vermont's recent capital position, alongside several patterns that may warrant further attention from the Bond Bank.</p>
+
+    <div class="findings">
+      <div class="finding-col finding-col-strength">
+        <div class="finding-title">◆ Strengths</div>
+        <ul class="finding-list">
+          <li>Ranks <span class="data">17th nationally</span> in highway investment per capita — above the national median.</li>
+          <li>Leads <span class="data">NH and ME</span> in overall per-capita capital spending among New England peers.</li>
+          <li>Successful energy transition: <span class="data">solar overtook biomass</span> as standard component since ~2018.</li>
+        </ul>
+      </div>
+
+      <div class="finding-col finding-col-attention">
+        <div class="finding-title">◇ Areas Worth Attention</div>
+        <ul class="finding-list">
+          <li>Water lending share fell <span class="data">19.7% → 7.1%</span> from FY2022 to FY2024.</li>
+          <li>School buildings now account for <span class="data">56.2%</span> of new money issuance.</li>
+          <li>Broadband financing recorded at <span class="data">$0</span>; NH committed $21.75M in FY2022 alone.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DATA STORY -->
+    <div class="data-story">
+      <div class="data-story-label">Headline Finding</div>
+      <div class="data-story-headline">"Water lending share has shifted noticeably over a short period."</div>
+      <div class="data-bars">
+        <div class="bar-group">
+          <div class="bar-value">19.7%</div>
+          <div class="bar bar-fy22"></div>
+          <div class="bar-label">FY22</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-value">11.1%</div>
+          <div class="bar bar-fy23"></div>
+          <div class="bar-label">FY23</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-value">7.1%</div>
+          <div class="bar bar-fy24"></div>
+          <div class="bar-label">FY24</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--ink-light); font-style: italic; margin-top: 8px;">VTBB's water &amp; recreation share of new money issuance, FY2022 – FY2024. Over the same period, NHMBB moved in the opposite direction — from 15.0% to 20.2%.</p>
+    </div>
+  </section>
+
+  <!-- NEXT STEPS -->
+  <section>
+    <div class="section-label"><span class="section-num">05</span>Next Steps</div>
+    <h2>Four areas worth exploring.</h2>
+    <p>Rather than firm prescriptions, the paper offers four directions for VTBB to consider, each grounded in a corresponding finding.</p>
+
+    <div class="next-steps">
+      <div class="step-item">
+        <div class="step-content">
+          <strong>Strengthen Water Infrastructure Lending.</strong> Consider enhanced program terms for qualifying water and wastewater projects, complementing SRF programs where eligibility or timing constraints apply.
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-content">
+          <strong>Monitor Education Lending Sustainability.</strong> Incorporate enrollment-trend data into credit reviews to support more informed long-term lending decisions in the school district category.
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-content">
+          <strong>Support Regional Transportation Consolidation.</strong> Explore pooled loan structures that bundle multiple municipalities, increasing scale and coherence of transportation lending.
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-content">
+          <strong>Assess Broadband Lending Feasibility.</strong> Review whether broadband infrastructure lending is permissible under VTBB's existing General Resolution authority before any program design.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOPHON -->
+  <footer class="colophon">
+    <div class="colophon-row">
+      <strong>Prepared for</strong>
+      <span>Vermont Bond Bank</span>
+    </div>
+    <div class="colophon-row">
+      <strong>Institution</strong>
+      <span>NYU Wagner Graduate School of Public Service</span>
+    </div>
+    <div class="colophon-team">
+      <em>Capstone Team:</em>&nbsp; Boyuan Li · Haitao Lin · Ming Liu · Yufei Lu
+    </div>
+    <div class="colophon-footer">
+      ◆ &nbsp; Master of Public Administration · Spring 2026 &nbsp; ◆
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
